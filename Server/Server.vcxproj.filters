@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="main">
+      <UniqueIdentifier>{6442ad89-be56-44fb-903b-6282a00c5bed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="auth">
+      <UniqueIdentifier>{e73efd31-3e36-49f0-81da-ca6e07f090e5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="srv_main.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
