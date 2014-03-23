@@ -15,7 +15,7 @@ ClientSession::~ClientSession()
 
 void ClientSession::OnRead(const boost::system::error_code& ec)
 {
-	if (!ec)
+	if (ec)
 		return;
 
 	// do we have bytes on connection
@@ -103,4 +103,5 @@ void Server::Listen(const std::string ip_addr, const int port)
 void Server::Stop()
 {
 	GetIoService().stop();
+	acceptor_.close();
 }
