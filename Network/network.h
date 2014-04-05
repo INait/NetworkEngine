@@ -3,6 +3,7 @@
 #include <string>
 
 #include <boost/asio.hpp>
+#include <boost/enable_shared_from_this.hpp>
 
 class Server;
 class ClientSession : public std::enable_shared_from_this< ClientSession >
@@ -54,4 +55,26 @@ private:
 
 	std::set< ClientSession* >			sessions_;		///< Clients, connected to the server
 
+};
+
+
+class Client : public boost::enable_shared_from_this< Client >
+{
+public:
+	Client();
+	~Client();
+
+	void Connect(const std::string& ip_addr, int port);
+	void OnConnect(const boost::system::error_code& ec);
+
+	void OnWrite(const boost::system::error_code& ec, size_t bytes);
+	void Stop();
+
+	boost::asio::io_service& GetIoService() { return io_service_; }
+
+private:
+	boost::asio::io_service			io_service_;
+	boost::asio::ip::tcp::socket	socket_;
+
+	bool							connected_;
 };

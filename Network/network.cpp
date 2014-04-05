@@ -105,3 +105,49 @@ void Server::Stop()
 	GetIoService().stop();
 	acceptor_.close();
 }
+
+// ================================================================================================
+// Client class
+// ================================================================================================
+
+Client::Client() : socket_(io_service_), connected_(false)
+{
+}
+
+Client::~Client()
+{
+}
+
+void Client::Connect(const std::string& ip_addr, int port)
+{
+	boost::asio::ip::tcp::endpoint ep(boost::asio::ip::address_v4::from_string(ip_addr), port);
+	socket_.async_connect(ep, boost::bind(&Client::OnConnect, this, _1));
+}
+
+void Client::OnConnect(const boost::system::error_code& ec)
+{
+	if (!ec)
+	{
+		connected_ = true;
+
+		const char msg[1024] = "Hello world from client";
+
+		std::string str(msg);
+
+		socket_.async_write_some(boost::asio::buffer(str), boost::bind(&Client::OnWrite, this, _1, _2));
+	}
+}
+
+void Client::OnWrite(const boost::system::error_code& ec, size_t bytes)
+{
+	// do nothing
+}
+
+void Client::Stop()
+{
+	if (!connected_)
+		return;
+
+	connected_ = false;
+	socket_.close();
+}
