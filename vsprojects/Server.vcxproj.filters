@@ -9,7 +9,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="srv_main.cpp">
+    <ClCompile Include="../Server/srv_main.cpp">
       <Filter>main</Filter>
     </ClCompile>
   </ItemGroup>

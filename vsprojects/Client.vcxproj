@@ -43,6 +43,7 @@
     <IncludePath>E:\dev\protobuf-2.5.0\src;E:\projects\client\Oblaka_msvs12\proto;C:\Boost\include\boost-1_55;$(IncludePath)</IncludePath>
     <LibraryPath>E:\projects\client;C:\Boost\lib;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)\..\build\$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -53,7 +54,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>libprotobuf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -70,11 +71,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="cl_main.cpp" />
+    <ClCompile Include="../Client/cl_main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Network\Network.vcxproj">
+    <ProjectReference Include="Network.vcxproj">
       <Project>{f314daa2-5ce3-4ba8-b2f5-a82a89558e05}</Project>
+      <Private>true</Private>
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

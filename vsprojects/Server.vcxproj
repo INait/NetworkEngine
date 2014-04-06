@@ -11,11 +11,16 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="srv_main.cpp" />
+    <ClCompile Include="../Server/srv_main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Network\Network.vcxproj">
+    <ProjectReference Include="Network.vcxproj">
       <Project>{f314daa2-5ce3-4ba8-b2f5-a82a89558e05}</Project>
+      <Private>true</Private>
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -50,6 +55,7 @@
     <IncludePath>E:\dev\boost_1_55_0;$(IncludePath)</IncludePath>
     <LibraryPath>E:\projects\client;C:\Boost\lib;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)\..\build\$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -61,7 +67,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>libprotobuf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

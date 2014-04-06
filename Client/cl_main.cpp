@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 
-#include "network.h"
+#include "../Network/network.h"
 
 int main()
 {
@@ -10,8 +10,6 @@ int main()
 
 	Client client;
 	client.Connect(ip_addr, port);
-
-	client.GetIoService().run();
 
 	return 0;
 }

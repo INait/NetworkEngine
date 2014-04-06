@@ -122,6 +122,18 @@ void Client::Connect(const std::string& ip_addr, int port)
 {
 	boost::asio::ip::tcp::endpoint ep(boost::asio::ip::address_v4::from_string(ip_addr), port);
 	socket_.async_connect(ep, boost::bind(&Client::OnConnect, this, _1));
+
+	for (;;)
+	{
+		try{
+			io_service_.run();
+			break;
+		}
+		catch (const std::exception& ex)
+		{
+			std::cout << "io_service_ exception: " << ex.what() << std::endl;
+		}
+	}
 }
 
 void Client::OnConnect(const boost::system::error_code& ec)
@@ -132,9 +144,7 @@ void Client::OnConnect(const boost::system::error_code& ec)
 
 		const char msg[1024] = "Hello world from client";
 
-		std::string str(msg);
-
-		socket_.async_write_some(boost::asio::buffer(str), boost::bind(&Client::OnWrite, this, _1, _2));
+		socket_.async_write_some(boost::asio::buffer(msg, strlen(msg)), boost::bind(&Client::OnWrite, this, _1, _2));
 	}
 }
 
