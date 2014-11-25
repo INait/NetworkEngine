@@ -4,13 +4,16 @@
 // ================================================================================================
 // Client Session class
 // ================================================================================================
+uint64_t ClientSession::global_client_counter_ = 0;
+
 ClientSession::ClientSession(Server& holder) : holder_(holder), socket_(holder.GetIoService())
 {
+	this->client_id_ = ++global_client_counter_;
 }
 
 ClientSession::~ClientSession()
 {
-
+	--global_client_counter_;
 }
 
 void ClientSession::OnRead(const boost::system::error_code& ec)
@@ -24,6 +27,7 @@ void ClientSession::OnRead(const boost::system::error_code& ec)
 	if (err || avail_bytes == 0)
 		return;
 
+	std::cout << "Client id = " << this->client_id_ << " msg: ";
 	for (size_t read_bytes = 0; read_bytes < avail_bytes;)
 	{
 		char data[1024];
@@ -36,6 +40,9 @@ void ClientSession::OnRead(const boost::system::error_code& ec)
 			// TODO: call commands here
 		}
 	}
+	std::cout << std::endl;
+
+	StartRead();
 }
 
 void ClientSession::StartRead()
@@ -62,6 +69,7 @@ void Server::OnAccept(ClientSessionPtr client_session, const boost::system::erro
 	{
 		client_session->StartRead();
 		sessions_.insert(client_session.get());
+		std::cout << "client connected, id = " << client_session->GetClientId() << std::endl;
 	}
 
 	StartAccept();
@@ -142,15 +150,20 @@ void Client::OnConnect(const boost::system::error_code& ec)
 	{
 		connected_ = true;
 
-		const char msg[1024] = "Hello world from client";
+		std::cout << "connection to server success" << std::endl;
 
-		socket_.async_write_some(boost::asio::buffer(msg, strlen(msg)), boost::bind(&Client::OnWrite, this, _1, _2));
+		//socket_.async_write_some(boost::asio::buffer(msg, strlen(msg)), boost::bind(&Client::OnWrite, this, _1, _2));
 	}
 }
 
 void Client::OnWrite(const boost::system::error_code& ec, size_t bytes)
 {
 	// do nothing
+}
+
+void Client::Write(std::string message)
+{
+	socket_.write_some(boost::asio::buffer(message));
 }
 
 void Client::Stop()

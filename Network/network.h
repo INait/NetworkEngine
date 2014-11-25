@@ -2,6 +2,8 @@
 #include <set>
 #include <string>
 
+#define _WINSOCK_DEPRECATED_NO_WARNINGS
+
 #include <boost/asio.hpp>
 #include <boost/enable_shared_from_this.hpp>
 
@@ -9,6 +11,8 @@ class Server;
 class ClientSession : public std::enable_shared_from_this< ClientSession >
 {
 public:
+	static uint64_t global_client_counter_;
+
 	ClientSession(Server& holder);
 	~ClientSession();
 
@@ -20,10 +24,12 @@ public:
 
 	boost::asio::ip::tcp::socket& GetSocket() { return socket_;  }
 
+	uint64_t					  GetClientId() const { return client_id_;  }
 private:
 	Server&							holder_;
 	boost::asio::ip::tcp::socket	socket_;
 
+	uint64_t						client_id_;
 };
 
 typedef std::shared_ptr< ClientSession > ClientSessionPtr;
@@ -69,6 +75,7 @@ public:
 
 	void OnWrite(const boost::system::error_code& ec, size_t bytes);
 	void Stop();
+	void Write(std::string message);
 
 	boost::asio::io_service& GetIoService() { return io_service_; }
 

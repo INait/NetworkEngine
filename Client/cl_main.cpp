@@ -11,5 +11,14 @@ int main()
 	Client client;
 	client.Connect(ip_addr, port);
 
+	while (true)
+	{
+		std::string message;
+		std::cin >> message;
+		if (message.find("exit") != std::string::npos)
+			break;
+
+		client.Write(message);
+	}
 	return 0;
 }
