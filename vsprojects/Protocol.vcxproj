@@ -55,7 +55,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <CustomBuild>
-      <Command>..\..\3rd\tools\protoc --proto_path=E:\projects\GameProj\TheGame\Protocol --cpp_out=$(ProjectDir)\..\proto %(FullPath)</Command>
+      <Command>$(ProjectDir)\..\tools\protoc --proto_path=E:\workspace\GameProj\Protocol --cpp_out=$(ProjectDir)\..\proto %(FullPath)</Command>
     </CustomBuild>
     <CustomBuild>
       <Outputs>$(ProjectDir)\..\proto\%(Filename).pb.h;$(ProjectDir)\..\proto\%(Filename).pb.cc</Outputs>
@@ -75,7 +75,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <CustomBuild>
-      <Command>..\..\3rd\tools\protoc --proto_path=E:\projects\GameProj\TheGame\Protocol --cpp_out=$(ProjectDir)\..\proto %(FullPath)</Command>
+      <Command>$(ProjectDir)\..\tools\protoc --proto_path=E:\workspace\GameProj\Protocol --cpp_out=$(ProjectDir)\..\proto %(FullPath)</Command>
     </CustomBuild>
     <CustomBuild>
       <Outputs>$(ProjectDir)\..\proto\%(Filename).pb.h;$(ProjectDir)\..\proto\%(Filename).pb.cc</Outputs>

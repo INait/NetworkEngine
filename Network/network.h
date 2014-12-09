@@ -52,8 +52,7 @@ public:
 	boost::asio::io_service& GetIoService() { return io_service_; }
 
 protected:
-	void StartAccept();
-	void OnAccept(ClientSessionPtr client_session, const boost::system::error_code& ec);
+	void Accept();
 
 private:
 	boost::asio::io_service				io_service_;	///< Service to provide I/O socket activities
@@ -76,6 +75,8 @@ public:
 	void OnWrite(const boost::system::error_code& ec, size_t bytes);
 	void Stop();
 	void Write(std::string message);
+	void StartRead();
+	void OnRead(const boost::system::error_code& ec);
 
 	boost::asio::io_service& GetIoService() { return io_service_; }
 

@@ -52,8 +52,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>E:\dev\boost_1_55_0;$(IncludePath)</IncludePath>
-    <LibraryPath>E:\projects\client;C:\Boost\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>E:\distr\Boost\include\boost-1_57;$(IncludePath)</IncludePath>
+    <LibraryPath>E:\projects\client;E:\distr\Boost\lib;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)\..\build\$(Configuration)\</OutDir>
     <IntDir>$(Configuration)\$(ProjectName)\</IntDir>
   </PropertyGroup>

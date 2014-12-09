@@ -40,8 +40,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>E:\dev\protobuf-2.5.0\src;E:\projects\client\Oblaka_msvs12\proto;C:\Boost\include\boost-1_55;$(IncludePath)</IncludePath>
-    <LibraryPath>E:\projects\client;C:\Boost\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\proto;E:\distr\Boost\include\boost-1_57;$(IncludePath)</IncludePath>
+    <LibraryPath>E:\projects\client;E:\distr\Boost\lib;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)\..\build\$(Configuration)\</OutDir>
     <IntDir>$(Configuration)\$(ProjectName)\</IntDir>
   </PropertyGroup>
